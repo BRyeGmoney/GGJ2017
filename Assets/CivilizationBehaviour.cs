@@ -19,7 +19,13 @@ public class CivilizationBehaviour : MonoBehaviour {
     public GameObject puzzleInteractionButtons;
     public GameObject puzzleQuestion;
 
+    public GameObject[] foliage;
+
     public int[,] playerAnswer;
+
+    public GameObject correctAnswerUI;
+    public GameObject wrongAnswerUI;
+    public GameObject puzzlePanel;
 
     private Villager villager;
 
@@ -33,7 +39,17 @@ public class CivilizationBehaviour : MonoBehaviour {
         Reset();
 
         NextPuzzle();
+
+        FaceFoliage();
 	}
+
+    private void FaceFoliage()
+    {
+        foreach (GameObject thing in foliage)
+        {
+            thing.transform.LookAt(Camera.main.transform);
+        }
+    }
 
     private void Reset()
     {
@@ -61,12 +77,26 @@ public class CivilizationBehaviour : MonoBehaviour {
 
     public void ShowPuzzle()
     {
-        puzzleQuestion.SetActive(true);
+        //DOTween.defaultAutoPlay = AutoPlay.None;
+        puzzleQuestion.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetId("show");
+        DOTween.To(() => puzzleQuestion.transform.localPosition, x => puzzleQuestion.transform.localPosition = x, new Vector3(-20f, -54.1f, 0f), 0.5f).SetId("show");
+        //puzzleQuestion.transform.DOMove(new Vector3(-20f, -54.1f, 0f), 0.5f).SetId("show");
+        DOTween.Play("show");
+        //puzzleQuestion.SetActive(true);
+
+        //DOTween.defaultAutoPlay = AutoPlay.All;
     }
 
     public void HidePuzzle()
     {
-        puzzleQuestion.SetActive(false);
+        //DOTween.defaultAutoPlay = AutoPlay.None;
+        puzzleQuestion.transform.DOScale(new Vector3(0, 0, 1), 0.2f).SetId("hide");
+        DOTween.To(() => puzzleQuestion.transform.localPosition, x => puzzleQuestion.transform.localPosition = x, new Vector3(50f, -100f, 0f), 0.2f).SetId("hide");
+        //puzzleQuestion.transform.DOMove(new Vector3(50f, -154f, 0f), 0.2f).SetId("hide");
+
+        DOTween.Play("hide");
+        //DOTween.defaultAutoPlay = AutoPlay.All;
+        //puzzleQuestion.SetActive(false);
     }
 
     public void SubmitSolution()//change solution to actually be a grid to compare against
@@ -76,7 +106,7 @@ public class CivilizationBehaviour : MonoBehaviour {
         if (!villageAnimator.GetBool("answerSubmitted")) //replace with a local, quick to retrieve variable
         {
             MoveButtonsOutOfView();
-            HidePuzzle();
+            //HidePuzzle();
             
             //villageAnimator.SetInteger("Decision", solution);
             villageAnimator.SetBool("answerSubmitted", true);

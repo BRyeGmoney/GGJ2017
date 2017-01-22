@@ -90,6 +90,8 @@
     <Compile Include="Assets\CivDecideWho.cs" />
     <Compile Include="Assets\CivVillagerState.cs" />
     <Compile Include="Assets\CivilizationBehaviour.cs" />
+    <Compile Include="Assets\CorrectAnswerState.cs" />
+    <Compile Include="Assets\GeneratePuzzleState.cs" />
     <Compile Include="Assets\JudgeSolutionState.cs" />
     <Compile Include="Assets\PuzzleGeneration.cs" />
     <Compile Include="Assets\TowerFsmBehaviour.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Assets\VillagerDoneWalkingState.cs" />
     <Compile Include="Assets\VillagerWalkBackState.cs" />
     <Compile Include="Assets\VillagerWalkOverState.cs" />
+    <Compile Include="Assets\WrongAnswerState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
