@@ -90,6 +90,7 @@
     <Compile Include="Assets\CivDecideWho.cs" />
     <Compile Include="Assets\CivVillagerState.cs" />
     <Compile Include="Assets\CivilizationBehaviour.cs" />
+    <Compile Include="Assets\JudgeSolutionState.cs" />
     <Compile Include="Assets\PuzzleGeneration.cs" />
     <Compile Include="Assets\TowerFsmBehaviour.cs" />
     <Compile Include="Assets\Villager.cs" />

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class CivilizationBehaviour : MonoBehaviour {
@@ -16,6 +18,8 @@ public class CivilizationBehaviour : MonoBehaviour {
 
     public GameObject puzzleInteractionButtons;
     public GameObject puzzleQuestion;
+
+    public int[,] playerAnswer;
 
     private Villager villager;
 
@@ -38,6 +42,7 @@ public class CivilizationBehaviour : MonoBehaviour {
 
     void NextPuzzle()
     {
+        playerAnswer = new int[,] { { 1, 1 }, { 1, 1 }, { 1, 1 }, { 1, 1 } };
         curLevel += 1;
         gameObject.GetComponent<Animator>().SetBool("NeedPuzzle", true);
     }
@@ -64,7 +69,7 @@ public class CivilizationBehaviour : MonoBehaviour {
         puzzleQuestion.SetActive(false);
     }
 
-    public void SubmitSolution(int solution)//change solution to actually be a grid to compare against
+    public void SubmitSolution()//change solution to actually be a grid to compare against
     {
         Animator villageAnimator = SingleVillager.GetComponent<Animator>();
 
@@ -73,8 +78,56 @@ public class CivilizationBehaviour : MonoBehaviour {
             MoveButtonsOutOfView();
             HidePuzzle();
             
-            villageAnimator.SetInteger("Decision", solution);
+            //villageAnimator.SetInteger("Decision", solution);
             villageAnimator.SetBool("answerSubmitted", true);
+        }
+    }
+
+    public void SetInput(Button pressedButton)
+    {
+        Image buttonImage = pressedButton.image;
+        int buttonPressed = Int32.Parse(pressedButton.name);
+        int toSetTo;
+
+        if (buttonImage.color == Color.white)
+        {
+            buttonImage.color = Color.black;
+            toSetTo = 0;
+        }
+        else
+        {
+            buttonImage.color = Color.white;
+            toSetTo = 1;
+        }
+
+        switch(buttonPressed)
+        {
+            case 0:
+                playerAnswer[0, 0] = toSetTo;
+                break;
+            case 1:
+                playerAnswer[0, 1] = toSetTo;
+                break;
+            case 2:
+                playerAnswer[1, 0] = toSetTo;
+                break;
+            case 3:
+                playerAnswer[1, 1] = toSetTo;
+                break;
+            case 4:
+                playerAnswer[2, 0] = toSetTo;
+                break;
+            case 5:
+                playerAnswer[2, 1] = toSetTo;
+                break;
+            case 6:
+                playerAnswer[3, 0] = toSetTo;
+                break;
+            case 7:
+                playerAnswer[3, 1] = toSetTo;
+                break;
+            default:
+                break;
         }
     }
 }

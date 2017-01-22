@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public class Villager : MonoBehaviour {
 
-    public GameObject WordOne;
-    public GameObject WordTwo;
-    public GameObject WordThree;
+    public SpriteRenderer WordOne;
+    public SpriteRenderer WordTwo;
+    public SpriteRenderer WordThree;
 
     private Puzzle curPuzzle;
 
@@ -24,10 +25,9 @@ public class Villager : MonoBehaviour {
     {
         curPuzzle = CivilizationBehaviour.civInstance.puzzleGen.GenerateAPuzzle(CivilizationBehaviour.civInstance.curLevel);
 
-        WordOne.GetComponent<Renderer>().material.SetTexture("_MainTex", curPuzzle.Hint1);//.mainTexture = curPuzzle.Hint1;
-        WordTwo.GetComponent<Renderer>().material.SetTexture("_MainTex", curPuzzle.Hint2);//.mainTexture = curPuzzle.Hint2;
-        WordThree.GetComponent<Renderer>().material.SetTexture("_MainTex", curPuzzle.Hint3);//.mainTexture = curPuzzle.Hint3;
-        //display curPuzzle
+        WordOne.sprite = Sprite.Create(curPuzzle.Hint1, new Rect(0,0, curPuzzle.Hint1.width, curPuzzle.Hint1.height), Vector2.zero);
+        WordTwo.sprite = Sprite.Create(curPuzzle.Hint2, new Rect(0, 0, curPuzzle.Hint2.width, curPuzzle.Hint2.height), Vector2.zero);
+        WordThree.sprite = Sprite.Create(curPuzzle.Hint3, new Rect(0, 0, curPuzzle.Hint3.width, curPuzzle.Hint3.height), Vector2.zero);
     }
 
     public void MoveToTower(Animator animator)
@@ -46,6 +46,17 @@ public class Villager : MonoBehaviour {
     private void VillagerDoneMoving(Animator animator)
     {
         animator.SetTrigger("doneWalking");
+    }
+
+    public bool ComparePuzzle()
+    {
+        int[,] playerAnswer = CivilizationBehaviour.civInstance.playerAnswer;
+        bool equal =
+            playerAnswer.Rank == curPuzzle.Answer.Rank &&
+            Enumerable.Range(0, playerAnswer.Rank).All(dimension => playerAnswer.GetLength(dimension) == curPuzzle.Answer.GetLength(dimension)) &&
+            playerAnswer.Cast<int>().SequenceEqual(curPuzzle.Answer.Cast<int>());
+        return equal;
+        //return CivilizationBehaviour.civInstance.playerAnswer == curPuzzle.Answer;
     }
 }
 

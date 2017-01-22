@@ -32,9 +32,9 @@ public class PuzzleGeneration {
         return puz1;
     }
 
-    private Texture GenerateImage(int[,] imageBlueprint)
+    private Texture2D GenerateImage(int[,] imageBlueprint)
     {
-        Texture2D texture = new Texture2D(40, 80, TextureFormat.ARGB32, false);
+        Texture2D texture = new Texture2D(40, 80, TextureFormat.RGBA32, false);
 
         //create black
         Color blackSquare = new Color(0, 0, 0);
@@ -62,7 +62,7 @@ public class PuzzleGeneration {
         //actually paint the stuff
         texture.Apply();
 
-        return texture as Texture;
+        return texture;
     }
 }
 
@@ -71,9 +71,9 @@ public class Puzzle
     public string GameObjectTag; //which game object that is a part of the civilization will be giving this challenge
     public bool Approved; //whether the user has correctly solved the puzzle
 
-    public Texture Hint1;
-    public Texture Hint2;
-    public Texture Hint3;
+    public Texture2D Hint1;
+    public Texture2D Hint2;
+    public Texture2D Hint3;
 
     public int[,] Answer;
 }

@@ -10,6 +10,7 @@ public class CivVillagerState : StateMachineBehaviour {
 
         if (villager != null)
         {
+            villager.GetComponent<Villager>().GeneratePuzzle();
             villager.SetActive(true);
             villager.GetComponent<Animator>().SetBool("startState", true);
         }
