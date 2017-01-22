@@ -8,5 +8,6 @@ public class WrongAnswerState : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         CivilizationBehaviour.civInstance.puzzlePanel.SetActive(false);
         CivilizationBehaviour.civInstance.wrongAnswerUI.SetActive(true);
+        CivilizationBehaviour.civInstance.towerFsm.SetTrigger("Wrong");
     }
 }

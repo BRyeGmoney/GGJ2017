@@ -91,9 +91,12 @@
     <Compile Include="Assets\CivVillagerState.cs" />
     <Compile Include="Assets\CivilizationBehaviour.cs" />
     <Compile Include="Assets\CorrectAnswerState.cs" />
+    <Compile Include="Assets\CorrectAnswerWindowState.cs" />
+    <Compile Include="Assets\DoneWaveState.cs" />
     <Compile Include="Assets\GeneratePuzzleState.cs" />
     <Compile Include="Assets\JudgeSolutionState.cs" />
     <Compile Include="Assets\PuzzleGeneration.cs" />
+    <Compile Include="Assets\TowerBehaviour.cs" />
     <Compile Include="Assets\TowerFsmBehaviour.cs" />
     <Compile Include="Assets\Villager.cs" />
     <Compile Include="Assets\VillagerDisplayPuzzleState.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Assets\VillagerWalkBackState.cs" />
     <Compile Include="Assets\VillagerWalkOverState.cs" />
     <Compile Include="Assets\WrongAnswerState.cs" />
+    <Compile Include="Assets\WrongAnswerWindowState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />

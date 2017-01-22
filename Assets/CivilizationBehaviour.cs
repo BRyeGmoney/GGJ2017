@@ -27,6 +27,8 @@ public class CivilizationBehaviour : MonoBehaviour {
     public GameObject wrongAnswerUI;
     public GameObject puzzlePanel;
 
+    public Animator towerFsm;
+
     private Villager villager;
 
 	// Use this for initialization
