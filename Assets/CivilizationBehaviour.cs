@@ -27,16 +27,19 @@ public class CivilizationBehaviour : MonoBehaviour {
         DOTween.Init();
 
         Reset();
+
+        NextPuzzle();
 	}
 
     private void Reset()
     {
-        curLevel = 0;
+        curLevel = -1;
     }
 
     void NextPuzzle()
     {
         curLevel += 1;
+        gameObject.GetComponent<Animator>().SetBool("NeedPuzzle", true);
     }
 
     public void MoveButtonsInView()
@@ -74,15 +77,4 @@ public class CivilizationBehaviour : MonoBehaviour {
             villageAnimator.SetBool("answerSubmitted", true);
         }
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-		
-	}
-}
-
-public class Puzzle
-{
-    public string GameObjectTag; //which game object that is a part of the civilization will be giving this challenge
-    public bool Approved; //whether the user has correctly solved the puzzle
 }

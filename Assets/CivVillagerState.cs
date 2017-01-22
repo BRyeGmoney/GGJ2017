@@ -13,6 +13,10 @@ public class CivVillagerState : StateMachineBehaviour {
             villager.SetActive(true);
             villager.GetComponent<Animator>().SetBool("startState", true);
         }
-        
 	}
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.SetBool("villagerDone", false);
+    }
 }

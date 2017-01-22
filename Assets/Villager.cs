@@ -5,6 +5,12 @@ using DG.Tweening;
 
 public class Villager : MonoBehaviour {
 
+    public GameObject WordOne;
+    public GameObject WordTwo;
+    public GameObject WordThree;
+
+    private Puzzle curPuzzle;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -16,8 +22,11 @@ public class Villager : MonoBehaviour {
 
     public void GeneratePuzzle()
     {
-        int[,] curPuzzle = CivilizationBehaviour.civInstance.puzzleGen.GenerateAPuzzle(CivilizationBehaviour.civInstance.curLevel);
+        curPuzzle = CivilizationBehaviour.civInstance.puzzleGen.GenerateAPuzzle(CivilizationBehaviour.civInstance.curLevel);
 
+        WordOne.GetComponent<Renderer>().material.SetTexture("_MainTex", curPuzzle.Hint1);//.mainTexture = curPuzzle.Hint1;
+        WordTwo.GetComponent<Renderer>().material.SetTexture("_MainTex", curPuzzle.Hint2);//.mainTexture = curPuzzle.Hint2;
+        WordThree.GetComponent<Renderer>().material.SetTexture("_MainTex", curPuzzle.Hint3);//.mainTexture = curPuzzle.Hint3;
         //display curPuzzle
     }
 
@@ -31,7 +40,7 @@ public class Villager : MonoBehaviour {
 
     public void MoveBack(Animator animator)
     {
-        DOTween.To(() => transform.localPosition, x => transform.localPosition = x, new Vector3(-4.3f, 0.6f, 4.43f), 1).OnComplete(() => VillagerDoneMoving(animator));
+        DOTween.To(() => transform.localPosition, x => transform.localPosition = x, new Vector3(21.67f, 0.6f, 4.43f), 1).OnComplete(() => VillagerDoneMoving(animator));
     }
 
     private void VillagerDoneMoving(Animator animator)
